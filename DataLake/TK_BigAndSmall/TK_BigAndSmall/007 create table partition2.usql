@@ -1,0 +1,67 @@
+﻿USE DATABASE BigDB;
+
+@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string
+    FROM "adl://tkdemo.azuredatalakestore.net/big20000000/file000000.tsv"
+    USING Extractors.Tsv();
+
+@filter =
+    SELECT * FROM @input
+    WHERE id1 == "ABC" OR id1 == "ABD";
+
+OUTPUT  @filter  
+    TO "/output/007atmpa.csv" 
+
+      USING Outputters.Csv();
+
+DROP TABLE IF EXISTS TableFile000000PDA;
+
+
+CREATE TABLE TableFile000000PDA
+(
+    id1 string,
+    id2 string,
+    valueint int,
+    valuedouble double,
+    dt DateTime,
+    sentence string,
+    INDEX IDX_DT
+    CLUSTERED(dt ASC)
+    PARTITIONED BY (id1) 
+       DISTRIBUTED BY
+    HASH(valueint)
+    INTO 15
+);
+ALTER TABLE TableFile000000PDA ADD PARTITION ("ABC"), PARTITION ("ABD");
+
+INSERT TableFile000000PDA
+PARTITION
+(
+    "ABC"
+)
+SELECT /*id1,*/ id2,
+       valueint,
+       valuedouble,
+       dt,
+       sentence
+FROM @input
+WHERE id1 == "ABC";
+
+INSERT TableFile000000PDA
+PARTITION
+(
+    "ABD"
+)
+SELECT /*id1,*/ id2,
+       valueint,
+       valuedouble,
+       dt,
+       sentence
+FROM @input
+WHERE id1 == "ABD";
+

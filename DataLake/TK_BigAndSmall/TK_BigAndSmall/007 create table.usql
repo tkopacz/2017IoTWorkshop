@@ -1,0 +1,33 @@
+﻿
+CREATE DATABASE IF NOT EXISTS BigDB;
+
+USE DATABASE BigDB;
+
+@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string
+    FROM "adl://tkdemo.azuredatalakestore.net/big20000000/file000000.tsv"
+    USING Extractors.Tsv();
+
+
+CREATE TABLE IF NOT EXISTS TableFile000000  (  
+       INDEX IDX_ID1 CLUSTERED (id1 ASC)
+       PARTITIONED BY HASH (id1))
+       AS SELECT * FROM @input;
+
+CREATE TABLE IF NOT EXISTS TableFile000000P15  (  
+       INDEX IDX_ID1 CLUSTERED (id1 ASC)
+       PARTITIONED BY HASH (id1) INTO 15)
+       AS SELECT * FROM @input;
+
+CREATE TABLE IF NOT EXISTS TableFile000000D  (  
+       INDEX IDX_DT CLUSTERED (dt ASC)
+       DISTRIBUTED BY HASH (id1) 
+       )
+                                                   
+       AS SELECT * FROM @input;
+

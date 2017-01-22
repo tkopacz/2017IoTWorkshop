@@ -1,0 +1,15 @@
+﻿@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string
+    FROM "adl://tkdemo.azuredatalakestore.net/big20000000/file000000.tsv"
+    USING Extractors.Tsv();
+
+@outputFile = SELECT * FROM @input WHERE id1 == "ABC";
+
+OUTPUT @outputFile   
+    TO "adl://tkdemo.azuredatalakestore.net/output/008querytable_file.csv"
+      USING Outputters.Csv();

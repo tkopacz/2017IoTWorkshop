@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>ca0a41da-23f6-4d38-8988-ff90267b1aa4</ProjectGuid>
+    <OutputType>File</OutputType>
+    <AssemblyName>Algebra.xml</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <Name>TK_BigAndSmall</Name>
+    <RootNamespace>TK_BigAndSmall</RootNamespace>
+    <RuntimeVersion>default</RuntimeVersion>
+    <OutputStreamPath>C:\Users\tkopa\AppData\Local\USQLDataRoot</OutputStreamPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Script Include="001 - extract + filter.usql" />
+    <Script Include="002 - fileset + filter.usql" />
+    <Script Include="003 - extract big.usql" />
+    <Script Include="004 - count big.usql" />
+    <Script Include="005 count big fileset.usql" />
+    <Script Include="006 count large small fileset.usql" />
+    <Script Include="007 create table partition.usql" />
+    <Script Include="007 create table partition2.usql" />
+    <Script Include="007 create table.usql" />
+    <Script Include="008 QueryTable.usql" />
+    <Script Include="009 QueryFiles.usql" />
+    <Script Include="009 update partition.usql" />
+    <Script Include="010 query updated table.usql" />
+    <Script Include="011 create statistics.usql" />
+    <Script Include="006a count large small fileset.usql" />
+    <Script Include="L001 - count fileset.usql" />
+    <ScriptCode Include="001 - extract + filter.usql.cs">
+      <DependentUpon>001 - extract + filter.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="002 - fileset + filter.usql.cs">
+      <DependentUpon>002 - fileset + filter.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="003 - extract big.usql.cs">
+      <DependentUpon>003 - extract big.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="004 - count big.usql.cs">
+      <DependentUpon>004 - count big.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="005 count big fileset.usql.cs">
+      <DependentUpon>005 count big fileset.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="006 count large small fileset.usql.cs">
+      <DependentUpon>006 count large small fileset.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="007 create table partition.usql.cs">
+      <DependentUpon>007 create table partition.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="007 create table partition2.usql.cs">
+      <DependentUpon>007 create table partition2.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="007 create table.usql.cs">
+      <DependentUpon>007 create table.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="008 QueryTable.usql.cs">
+      <DependentUpon>008 QueryTable.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="009 QueryFiles.usql.cs">
+      <DependentUpon>009 QueryFiles.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="009 update partition.usql.cs">
+      <DependentUpon>009 update partition.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="010 query updated table.usql.cs">
+      <DependentUpon>010 query updated table.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="011 create statistics.usql.cs">
+      <DependentUpon>011 create statistics.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="006a count large small fileset.usql.cs">
+      <DependentUpon>006a count large small fileset.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="L001 - count fileset.usql.cs">
+      <DependentUpon>L001 - count fileset.usql</DependentUpon>
+    </ScriptCode>
+  </ItemGroup>
+  <Import Project="$(AppData)\Microsoft\DataLake\MsBuild\1.0\Usql.targets" />
+</Project>

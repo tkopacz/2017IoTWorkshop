@@ -1,0 +1,42 @@
+SELECT
+    Word,Dt,MsgType,DeviceName,   
+    EventProcessedUtcTime,EventEnqueuedUtcTime, PartitionId, IoTHub.MessageId, IoTHub.CorrelationId, IoTHub.ConnectionDeviceId, IoTHub.ConnectionDeviceGenerationId, IoTHub.EnqueuedTime, IoTHub.StreamId
+INTO
+    lake
+FROM
+    iot
+
+------------------------------
+SELECT
+    *
+INTO
+    blob
+FROM
+    iot timestamp by Dt 
+
+
+SELECT
+    *
+INTO
+    lake
+FROM
+    iot timestamp by Dt 
+
+SELECT
+    *
+INTO
+    documentdb
+FROM
+    iot timestamp by Dt 
+
+select max(Dt) as maxdt,avg(Light) as avgLight, avg(Temperature) as avgTemperature into [lakeaggregate] from [iot] timestamp by Dt group by TumblingWindow(minute,1)
+
+SELECT
+    i1.avgLight as i1avgLight, i2.avgLight as i2smallavgLight
+INTO
+    lakeaggregate1
+FROM
+    iot i1 timestamp by Dt 
+JOIN
+    iotsmall i2 timestamp by Dt ON i1.DeviceName = i2.DeviceName AND DATEDIFF(second, i1, i2) BETWEEN 0 AND 5
+

@@ -1,0 +1,12 @@
+﻿USE DATABASE BigDB;
+
+@filter = SELECT * FROM TableFile000000PDA WHERE id1 == "ABE";
+
+OUTPUT  @filter TO "/output/007atmpABE.csv" 
+  USING Outputters.Csv();
+
+
+@filter = SELECT * FROM TableFile000000PDA;
+
+OUTPUT  @filter TO "/output/007atmpALL.csv" 
+  USING Outputters.Csv();

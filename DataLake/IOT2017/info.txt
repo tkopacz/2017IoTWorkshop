@@ -1,0 +1,35 @@
+USE master; 
+REFERENCE ASSEMBLY [Newtonsoft.Json];
+REFERENCE ASSEMBLY [Microsoft.Analytics.Samples.Formats];
+
+@input = EXTRACT
+dt DateTime,
+ADC3 double,
+ADC4 double,
+ADC5 double,
+ADC6 double,
+ADC7 double,
+Altitude double,
+Pressure double,
+Temperature double,
+Potentiometer1 double,
+Potentiometer2 double,
+Light double,
+MsgType string,
+DeviceName string,
+EventProcessedUtcTime DateTime,
+PartitionId string,
+EventEnqueuedUtcTime DateTime,
+IoTHub string,
+
+        filename string,
+        date DateTime
+        FROM "/iot2017/demo1/{date:yyyy}/{date:MM}/{date:dd}/{filename}.csv"
+        USING Extractors.Csv(skipFirstNRows:1);
+
+@filter = SELECT COUNT(*) AS cnt FROM @input;
+
+OUTPUT @filter TO "/iot2017/demo1out/cnt2.csv"
+USING Outputters.Csv();
+
+--------------------------

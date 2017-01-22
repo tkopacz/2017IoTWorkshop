@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26014.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TKConsoleSend", "TKConsoleSend\TKConsoleSend.csproj", "{8D6CBDFB-3D8B-4674-9232-4051C6D1C92A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TKConsoleServiceSend", "TKConsoleServiceSend\TKConsoleServiceSend.csproj", "{293ABF24-B2D2-4260-8D3F-DD4667D4EE82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPC", "WpfPC\WpfPC.csproj", "{CF08A1E0-4AF7-4219-81CB-3D10495BFA5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleEventListener", "SimpleEventListener\SimpleEventListener.csproj", "{4C32CE65-9503-4C09-AEA4-40858F1AC6BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D6CBDFB-3D8B-4674-9232-4051C6D1C92A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6CBDFB-3D8B-4674-9232-4051C6D1C92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6CBDFB-3D8B-4674-9232-4051C6D1C92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6CBDFB-3D8B-4674-9232-4051C6D1C92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{293ABF24-B2D2-4260-8D3F-DD4667D4EE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{293ABF24-B2D2-4260-8D3F-DD4667D4EE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{293ABF24-B2D2-4260-8D3F-DD4667D4EE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{293ABF24-B2D2-4260-8D3F-DD4667D4EE82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF08A1E0-4AF7-4219-81CB-3D10495BFA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF08A1E0-4AF7-4219-81CB-3D10495BFA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF08A1E0-4AF7-4219-81CB-3D10495BFA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF08A1E0-4AF7-4219-81CB-3D10495BFA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C32CE65-9503-4C09-AEA4-40858F1AC6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C32CE65-9503-4C09-AEA4-40858F1AC6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C32CE65-9503-4C09-AEA4-40858F1AC6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C32CE65-9503-4C09-AEA4-40858F1AC6BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8
+	EndGlobalSection
+EndGlobal

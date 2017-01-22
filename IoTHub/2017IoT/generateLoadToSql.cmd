@@ -1,0 +1,1 @@
+ab -n 100 -c 10 "http://pltkw3funconsumption.azurewebsites.net/api/TKSendToSqlDatabase?module=A1&function=F1&val=123"

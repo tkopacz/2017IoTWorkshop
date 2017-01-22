@@ -1,0 +1,5 @@
+azure config mode arm
+azure account set "TK pltkw3"
+azure datalake store filesystem list tkdemo /big100000
+azure datalake store filesystem list tkdemo /big100000 --json > big100000.json
+azure datalake store filesystem import tkdemo "C:\AzureFY15TK\18aHDInsight2016\02 Data Lake\TEXT\RDF_GUTENBERG\0\pg0.rdf" /TEXT/RDF_GUTENBERG/0/pg0.rdf 

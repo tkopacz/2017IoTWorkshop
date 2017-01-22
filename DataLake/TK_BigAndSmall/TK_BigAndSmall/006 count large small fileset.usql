@@ -1,0 +1,17 @@
+﻿@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string,
+            filename        string
+    FROM "adl://tkdemo.azuredatalakestore.net/big100000/{filename}.tsv"
+    USING Extractors.Tsv();
+
+@filter = 
+    SELECT COUNT(*) AS cnt FROM @input WHERE valueint > 1612390204;
+
+OUTPUT @filter   
+    TO "/output/006_test1multiplesmall.csv"
+      USING Outputters.Csv();

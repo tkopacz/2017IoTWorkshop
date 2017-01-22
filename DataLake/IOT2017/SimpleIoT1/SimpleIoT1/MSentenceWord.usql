@@ -1,0 +1,15 @@
+﻿//dpepltkdemo
+
+
+@inputMWord = EXTRACT
+        word string, dt DateTime,msgtype string, devicename string,
+//Fileset
+        filename string,
+        date DateTime
+//Source
+        FROM "/iot2017/sa17Word/demo1/{date:yyyy}/{date:MM}/{date:dd}/{filename}.csv"
+        USING Extractors.Csv(skipFirstNRows:1,silent:true);
+
+@MWord = SELECT * FROM @inputMWord WHERE msgtype=="MWord" AND word!=null;
+
+OUTPUT @MWord TO "/iot2017/sa17Word/demo1out/MWord.csv" USING Outputters.Csv();

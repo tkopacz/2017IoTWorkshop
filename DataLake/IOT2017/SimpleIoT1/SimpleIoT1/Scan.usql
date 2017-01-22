@@ -1,0 +1,75 @@
+﻿//dpepltkdemo
+
+//THIS WILL NOT WORK
+//@input = EXTRACT
+////MAll
+//        dt DateTime,
+//        ADC3 double,
+//        ADC4 double,
+//        ADC5 double,
+//        ADC6 double,
+//        ADC7 double,
+//        Altitude double,
+//        Pressure double,
+//        Temperature double,
+//        Potentiometer1 double,
+//        Potentiometer2 double,
+//        Light double,
+//        MsgType string,
+//        DeviceName string,
+//        EventProcessedUtcTime DateTime,
+//        PartitionId string,
+//        EventEnqueuedUtcTime DateTime,
+//        IoTHub string,
+////MSentence
+//        Sentence string,
+////MWord
+//        Word string,
+////Fileset
+//        filename string,
+//        date DateTime
+////Source
+//        FROM "/iot2017/demo1/{date:yyyy}/{date:MM}/{date:dd}/{filename}.csv"
+//        USING Extractors.Csv(skipFirstNRows:1,silent:true);
+
+@inputMAll = EXTRACT
+        dt DateTime,
+//MAll, MAllNum
+        ADC3 double,ADC4 double,ADC5 double,ADC6 double,ADC7 double,Altitude double, ColorName string,ColorRaw string,ColorRgb string, Pressure double,Temperature double,Potentiometer1 double,Potentiometer2 double,Light double,
+        MsgType string,DeviceName string,EventProcessedUtcTime DateTime,PartitionId string,EventEnqueuedUtcTime DateTime,IoTHub string,
+//Fileset
+        filename string,
+        date DateTime
+//Source
+        FROM "/iot2017/demo1/{date:yyyy}/{date:MM}/{date:dd}/{filename}.csv"
+        USING Extractors.Csv(skipFirstNRows:1,silent:true);
+
+@inputMAllNum = EXTRACT
+        dt DateTime,
+//MAll, MAllNum
+        ADC3 double,ADC4 double,ADC5 double,ADC6 double,ADC7 double,Altitude double,Pressure double,Temperature double,Potentiometer1 double,Potentiometer2 double,Light double,
+        MsgType string,DeviceName string,EventProcessedUtcTime DateTime,PartitionId string,EventEnqueuedUtcTime DateTime,IoTHub string,
+//Fileset
+        filename string,
+        date DateTime
+//Source
+        FROM "/iot2017/demo1/{date:yyyy}/{date:MM}/{date:dd}/{filename}.csv"
+        USING Extractors.Csv(skipFirstNRows:1,silent:true);
+
+@total = SELECT MsgType, dt,EventProcessedUtcTime,EventEnqueuedUtcTime FROM @inputMAll 
+         UNION SELECT MsgType, dt,EventProcessedUtcTime,EventEnqueuedUtcTime FROM @inputMAllNum;
+
+@filter = SELECT MsgType,COUNT(*) AS cnt, MIN(dt) AS dtMin, MAX(dt) AS dtMint FROM @total GROUP BY MsgType;
+@filter1 = SELECT COUNT(*) AS cnt FROM @total;
+
+@MAll = SELECT * FROM @inputMAll WHERE MsgType=="MAll";
+@MAllNum = SELECT * FROM @inputMAllNum WHERE MsgType=="MAllNum";
+
+OUTPUT @filter TO "/iot2017/demo1out/cnt_filter.csv"
+USING Outputters.Csv();
+
+OUTPUT @filter1 TO "/iot2017/demo1out/cnt_filter1.csv"
+USING Outputters.Csv();
+
+OUTPUT @MAll TO "/iot2017/demo1out/Mall.csv" USING Outputters.Csv();
+OUTPUT @MAllNum TO "/iot2017/demo1out/MAllNum.csv" USING Outputters.Csv();

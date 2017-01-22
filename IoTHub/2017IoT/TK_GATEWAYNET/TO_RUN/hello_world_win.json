@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "name": "logger",
+      "loader": {
+        "name": "native",
+        "entrypoint": {
+          "module.path": "logger.dll"
+        }
+      },
+      "args": {
+        "filename": "log.txt"
+      }
+    },
+    {
+      "name": "hello_world",
+      "loader": {
+        "name": "native",
+        "entrypoint": {
+          "module.path": "hello_world.dll"
+        }
+      },
+      "args": null
+    }
+  ],
+  "links": [
+    {
+      "source": "hello_world",
+      "sink": "logger"
+    }
+  ]
+}

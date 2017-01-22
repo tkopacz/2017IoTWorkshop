@@ -1,0 +1,34 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>76a27430-6a4d-4059-b7f1-7125cbcb21aa</ProjectGuid>
+    <OutputType>File</OutputType>
+    <AssemblyName>Algebra.xml</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <Name>SimpleIoT1</Name>
+    <RootNamespace>SimpleIoT1</RootNamespace>
+    <RuntimeVersion>default</RuntimeVersion>
+    <OutputStreamPath>C:\Users\tkopacz\AppData\Local\USQLDataRoot</OutputStreamPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Script Include="MSentenceWord.usql" />
+    <Script Include="Scan.usql" />
+    <ScriptCode Include="MSentenceWord.usql.cs">
+      <DependentUpon>MSentenceWord.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="Scan.usql.cs">
+      <DependentUpon>Scan.usql</DependentUpon>
+    </ScriptCode>
+  </ItemGroup>
+  <Import Project="$(AppData)\Microsoft\DataLake\MsBuild\1.0\Usql.targets" />
+</Project>

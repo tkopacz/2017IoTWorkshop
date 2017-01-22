@@ -1,0 +1,73 @@
+[
+  {
+    "namespace": "mvafy15",
+    "eventHub": "mvafy15eh",
+    "consumerGroup": "$Default",
+    "leases": {
+      "5": {
+        "PartitionId": "5",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "959744",
+        "SequenceNumber": 1795
+      },
+      "2": {
+        "PartitionId": "2",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "1604304",
+        "SequenceNumber": 2671
+      },
+      "7": {
+        "PartitionId": "7",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "1151944",
+        "SequenceNumber": 2004
+      },
+      "4": {
+        "PartitionId": "4",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "1085496",
+        "SequenceNumber": 1869
+      },
+      "3": {
+        "PartitionId": "3",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "2545216",
+        "SequenceNumber": 3423
+      },
+      "0": {
+        "PartitionId": "0",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "1275152",
+        "SequenceNumber": 2028
+      },
+      "1": {
+        "PartitionId": "1",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "6644848",
+        "SequenceNumber": 10111
+      },
+      "6": {
+        "PartitionId": "6",
+        "Owner": "ServiceBusExplorer",
+        "Token": null,
+        "Epoch": 0,
+        "Offset": "1109160",
+        "SequenceNumber": 1860
+      }
+    }
+  }
+]

@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfPC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPC"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="538" Width="525">
+    <Grid>
+        <Button x:Name="cmd01RegisterNewDevice" Content="Register new device" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" Width="497" Click="cmd01RegisterNewDevice_Click"/>
+        <Button x:Name="cmd02GetPCInfo" Content="Get PC device info" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top" Width="497" Click="cmd02GetPCInfo_Click" />
+        <Button x:Name="cmd03SendTelemetryAMQP" Content="Send - AMQP" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="497" Click="cmd03SendTelemetryAMQP_Click" />
+        <Button x:Name="cmd04SendTelemetryMQTT" Content="Send - MQTT" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="497" Click="cmd04SendTelemetryMQTT_Click" />
+        <Button x:Name="cmd05SendTelemetryHTTP" Content="Send - HTTP" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="497" Click="cmd05SendTelemetryHTTP_Click" />
+        <Button x:Name="cmd06SendTelemetryBlob" Content="Send - Blob" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="497" Click="cmd06SendTelemetryBlob_Click"/>
+        <Button x:Name="cmd07SubscribeAndWaitForMessage" Content="Subscribe for Message" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Width="497" Click="cmd07SubscribeAndWaitForMessage_Click" />
+        <Button x:Name="cmd08SubscribeAndWaitForMethod" Content="Subscribe for Method and Twins operations" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Width="497" Click="cmd08SubscribeAndWaitForMethod_Click" />
+        <Button x:Name="cmd08Unsubscribe" Content="Unsubscribe" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="497" Click="cmd08Unsubscribe_Click"/>
+        <Button x:Name="cmd09CallMethod" Content="Call method" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="497" Click="cmd09CallMethod_Click"/>
+        <Button x:Name="cmd10WorkWithTwins" Content="Twins" HorizontalAlignment="Left" Margin="10,412,0,0" VerticalAlignment="Top" Width="497" Click="cmd10WorkWithTwins_Click" />
+        <Button x:Name="cmd11ScheduledUpdate" Content="Scheduled" HorizontalAlignment="Left" Margin="10,462,0,0" VerticalAlignment="Top" Width="497" Click="cmd11ScheduledUpdate_Click"/>
+
+    </Grid>
+</Window>

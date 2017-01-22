@@ -1,0 +1,17 @@
+﻿@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string
+    FROM "/small/file000000.tsv"
+    USING Extractors.Tsv();
+
+@filter = 
+    SELECT id1,id2,valueint,valuedouble,dt,sentence FROM @input WHERE valueint > 1612390204;
+
+///No space in name!
+OUTPUT @filter   
+    TO "/output/001_ef.csv"
+      USING Outputters.Csv();

@@ -1,0 +1,30 @@
+﻿USE DATABASE BigDB;
+
+//ALTER TABLE TableFile000000PDA ADD PARTITION ("ABE");
+
+TRUNCATE TABLE TableFile000000PDA PARTITION("ABE");
+
+@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string
+    FROM "adl://tkdemo.azuredatalakestore.net/big20000000/file000000.tsv"
+    USING Extractors.Tsv();
+
+
+
+INSERT TableFile000000PDA
+PARTITION
+(
+    "ABE"
+)
+SELECT /*id1,*/ id2,
+       valueint,
+       valuedouble,
+       dt,
+       sentence
+FROM @input
+WHERE id1 == "ABE";

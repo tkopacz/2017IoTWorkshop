@@ -1,0 +1,20 @@
+﻿@input =
+    EXTRACT id1             string,
+            id2             string,
+            valueint        int,
+            valuedouble     double,
+            dt              DateTime,
+            sentence        string,
+            filename        string
+    FROM "/small/{filename}.tsv"
+    USING Extractors.Tsv();
+
+@filter = 
+    SELECT id1,id2,valueint,valuedouble,dt,sentence 
+        FROM @input 
+        WHERE valueint > 1612390204 
+        ORDER BY id1 OFFSET 0 ROWS;
+
+OUTPUT @filter   
+    TO "/output/002_test_1612390204.csv"
+      USING Outputters.Csv();

@@ -1,0 +1,33 @@
+﻿USE DATABASE BigDB;
+
+@outputTable =
+    SELECT *
+    FROM dbo.TableFile000000
+    WHERE id1 == "ABC";
+
+@outputTablePD =
+    SELECT *
+    FROM dbo.TableFile000000PD // WHERE id2 == "GMRXLJJKJB"
+             ;
+
+@outputTable =
+    SELECT *
+    FROM dbo.TableFile000000
+    WHERE id1 == "ABC";
+
+@outputTablePDA =
+    SELECT *
+    FROM dbo.TableFile000000PDA
+    WHERE id1 == "ABC";
+
+OUTPUT @outputTablePD
+TO "adl://tkdemo.azuredatalakestore.net/output/008_querytable_tablepd.csv"
+USING Outputters.Csv();
+
+OUTPUT @outputTablePDA
+TO "adl://tkdemo.azuredatalakestore.net/output/008_querytable_tablepda.csv"
+USING Outputters.Csv();
+
+OUTPUT @outputTable
+TO "adl://tkdemo.azuredatalakestore.net/output/008_querytable_table.csv"
+USING Outputters.Csv();

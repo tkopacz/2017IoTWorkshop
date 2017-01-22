@@ -1,0 +1,74 @@
+﻿REFERENCE ASSEMBLY ImageCommon;
+REFERENCE ASSEMBLY FaceSdk;
+REFERENCE ASSEMBLY ImageEmotion;
+REFERENCE ASSEMBLY ImageTagging;
+REFERENCE ASSEMBLY ImageOcr;
+
+@imgs =
+    EXTRACT FileName string,
+            ImgData byte[]
+    FROM @"/images/{FileName:*}.jpg"
+    USING new Cognition.Vision.ImageExtractor()
+    UNION
+    EXTRACT FileName string,
+            ImgData byte[]
+    FROM @"/images/{FileName:*}.jpeg"
+    USING new Cognition.Vision.ImageExtractor()
+    UNION
+    EXTRACT FileName string,
+            ImgData byte[]
+    FROM @"/images/{FileName:*}.png"
+    USING new Cognition.Vision.ImageExtractor();
+
+
+
+
+// Extract the number of objects on each image and tag them 
+@objects =
+    PROCESS @imgs
+    PRODUCE FileName,
+            NumObjects int,
+            Tags string
+    READONLY FileName
+    USING new Cognition.Vision.ImageTagger();
+OUTPUT @objects  
+    TO "/imagesout/objects.csv"
+      USING Outputters.Csv();
+
+@emotions =
+    PROCESS @imgs
+    PRODUCE FileName string,
+            NumFaces int,
+            Emotion string
+    READONLY FileName
+    USING new Cognition.Vision.EmotionAnalyzer();
+
+OUTPUT @emotions   
+    TO "/imagesout/emotions.csv"
+      USING Outputters.Csv();
+
+@faces =
+    PROCESS @imgs
+    PRODUCE FileName,
+            NumFaces int,
+            FaceAge string,
+            FaceGender string
+    READONLY FileName
+    USING new Cognition.Vision.FaceDetector();
+
+OUTPUT @faces   
+    TO "/imagesout/faces.csv"
+      USING Outputters.Csv();
+
+@ocrs =
+    PROCESS @imgs
+    PRODUCE FileName,
+            Text string
+    READONLY FileName
+    USING new Cognition.Vision.OcrExtractor();
+
+OUTPUT @ocrs   
+    TO "/imagesout/ocrs.csv"
+      USING Outputters.Csv();
+
+
