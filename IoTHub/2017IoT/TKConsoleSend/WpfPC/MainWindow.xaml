@@ -12,13 +12,16 @@
         <Button x:Name="cmd03SendTelemetryAMQP" Content="Send - AMQP" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="497" Click="cmd03SendTelemetryAMQP_Click" />
         <Button x:Name="cmd04SendTelemetryMQTT" Content="Send - MQTT" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="497" Click="cmd04SendTelemetryMQTT_Click" />
         <Button x:Name="cmd05SendTelemetryHTTP" Content="Send - HTTP" HorizontalAlignment="Left" Margin="10,180,0,0" VerticalAlignment="Top" Width="497" Click="cmd05SendTelemetryHTTP_Click" />
-        <Button x:Name="cmd06SendTelemetryBlob" Content="Send - Blob" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="497" Click="cmd06SendTelemetryBlob_Click"/>
+        <Button x:Name="cmd06SendTelemetryBlob" Content="Send - Blob" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="497" Click="cmd06SendTelemetryBlob_Click"/>
         <Button x:Name="cmd07SubscribeAndWaitForMessage" Content="Subscribe for Message" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" Width="497" Click="cmd07SubscribeAndWaitForMessage_Click" />
         <Button x:Name="cmd08SubscribeAndWaitForMethod" Content="Subscribe for Method and Twins operations" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" Width="497" Click="cmd08SubscribeAndWaitForMethod_Click" />
         <Button x:Name="cmd08Unsubscribe" Content="Unsubscribe" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top" Width="497" Click="cmd08Unsubscribe_Click"/>
         <Button x:Name="cmd09CallMethod" Content="Call method" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top" Width="497" Click="cmd09CallMethod_Click"/>
         <Button x:Name="cmd10WorkWithTwins" Content="Twins" HorizontalAlignment="Left" Margin="10,412,0,0" VerticalAlignment="Top" Width="497" Click="cmd10WorkWithTwins_Click" />
         <Button x:Name="cmd11ScheduledUpdate" Content="Scheduled" HorizontalAlignment="Left" Margin="10,462,0,0" VerticalAlignment="Top" Width="497" Click="cmd11ScheduledUpdate_Click"/>
+        <Button x:Name="cmd05SendTelemetryStart" Content="Start background send" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Width="160" Click="cmd05SendTelemetryStart_Click" />
+        <Button x:Name="cmd05SendTelemetryStop" Content="Stop" HorizontalAlignment="Left" Margin="175,205,0,0" VerticalAlignment="Top" Width="160" Click="cmd05SendTelemetryStop_Click" />
+        <Button x:Name="cmd05SendTelemetryAlert" Content="Send ALERT" HorizontalAlignment="Left" Margin="347,205,0,0" VerticalAlignment="Top" Width="160" Click="cmd05SendTelemetryAlert_Click" />
 
     </Grid>
 </Window>

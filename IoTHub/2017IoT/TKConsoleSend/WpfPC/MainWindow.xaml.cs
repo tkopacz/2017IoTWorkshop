@@ -23,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Azure.Devices.Shared;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace WpfPC
 {
@@ -159,6 +160,78 @@ Microsoft.Azure.Devices.Client.TransportType.Mqtt);
             Debug.WriteLine("cmd06SendTelemetryBlob_Click");
         }
         #endregion
+        #region Send in background, send alert
+        DispatcherTimer m_t=null;
+        DeviceClient m_dc=null;
+        private async void cmd05SendTelemetryStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_t!=null) { m_t.Stop(); m_t = null; }
+            if (m_dc!=null) { await m_dc.CloseAsync(); m_dc = null; }
+            m_dc = DeviceClient.CreateFromConnectionString(m_devConnection, Microsoft.Azure.Devices.Client.TransportType.Mqtt);
+            m_t = new DispatcherTimer();
+            m_t.Tick += M_t_Tick;
+            m_t.Interval = TimeSpan.FromSeconds(5);
+            m_t.Start();
+            cmd05SendTelemetryStart.IsEnabled = false;
+        }
+
+        string[] deviceNames = new string[] { "PC", "PC0", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9" };
+        Random rnd = new Random();
+        private async void M_t_Tick(object sender, EventArgs e)
+        {
+            Microsoft.Azure.Devices.Client.Message message = createMessage();
+            //Add properties for routing
+            if (rnd.NextDouble() > 0.8) { message.Properties.Add("direction", "eventhub"); }
+            if (rnd.NextDouble() > 0.9) { message.Properties.Add("status", "error"); }
+            await m_dc.SendEventAsync(message);
+        }
+
+        private Microsoft.Azure.Devices.Client.Message createMessage()
+        {
+            DateTime now = DateTime.Now;
+            TimeSpan ts = new TimeSpan(now.Year, now.Minute, now.Second, now.Millisecond);
+
+            MAllNum mallnum = new MAllNum()
+            {
+                DeviceName = deviceNames[rnd.Next(deviceNames.Length)],
+                Light = 1000 * Math.Cos(ts.TotalMilliseconds / 175) * Math.Sin(ts.TotalMilliseconds / 360) + rnd.Next(30),
+                Potentiometer1 = 1000 * Math.Cos(ts.TotalMilliseconds / 275) * Math.Sin(ts.TotalMilliseconds / 560) + rnd.Next(30),
+                Potentiometer2 = 1000 * Math.Cos(ts.TotalMilliseconds / 60) * Math.Sin(ts.TotalMilliseconds / 120) + rnd.Next(30),
+                Pressure = (float)(1000 * Math.Cos(ts.TotalMilliseconds / 180) * Math.Sin(ts.TotalMilliseconds / 110) + rnd.Next(30)),
+                Temperature = (float)(1000 * Math.Cos(ts.TotalMilliseconds / 180) * Math.Sin(ts.TotalMilliseconds / 110) + rnd.Next(30)),
+                ADC3 = rnd.Next(1000),
+                ADC4 = rnd.Next(1000),
+                ADC5 = rnd.Next(1000),
+                ADC6 = rnd.Next(1000),
+                ADC7 = rnd.Next(1000),
+                Altitude = (float)(1000 * Math.Cos(ts.TotalMilliseconds / 480) * Math.Sin(ts.TotalMilliseconds / 2000) + rnd.Next(30)),
+            };
+            var messageString = JsonConvert.SerializeObject(mallnum);
+            var message = new Microsoft.Azure.Devices.Client.Message(Encoding.UTF8.GetBytes(messageString));
+            Debug.WriteLine($"MSG: {mallnum.Dt}");
+            return message;
+        }
+
+        private async void cmd05SendTelemetryStop_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_t!=null) { m_t.Stop(); m_t = null; }
+            if (m_dc!=null) { await m_dc.CloseAsync(); m_dc = null; }
+            Debug.WriteLine("STOP");
+            cmd05SendTelemetryStart.IsEnabled = true;
+        }
+
+        private async void cmd05SendTelemetryAlert_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_t == null || m_dc == null) return;
+
+            Microsoft.Azure.Devices.Client.Message message = createMessage();
+            //Add properties for routing
+            message.Properties.Add("alert", "1");
+            await m_dc.SendEventAsync(message);
+            Debug.WriteLine("ALERT");
+        }
+
+        #endregion
         #region Messages
         private async void cmd07SubscribeAndWaitForMessage_Click(object sender, RoutedEventArgs e)
         {
@@ -191,6 +264,7 @@ Microsoft.Azure.Devices.Client.TransportType.Amqp); //MQTT - ok, but no AbadonAs
 
         }
         #endregion
+
         #region Call Method
         static DeviceClient dcPC, dcPC1;
         private async void cmd08SubscribeAndWaitForMethod_Click(object sender, RoutedEventArgs e)
@@ -261,6 +335,7 @@ Microsoft.Azure.Devices.Client.TransportType.Mqtt);
                 , -1);
         }
         #endregion
+
         #region Twins
 
         private async void cmd10WorkWithTwins_Click(object sender, RoutedEventArgs e)
@@ -289,7 +364,8 @@ Microsoft.Azure.Devices.Client.TransportType.Mqtt);
                 tags = new
                 {
                     devicetype = "PC",
-                    location = "ROOF"
+                    location = "ROOF",
+                    owner = "SKANSKA"
                 }
             };
             await rm.UpdateTwinAsync("PC", JsonConvert.SerializeObject(patchPC), pcTwin.ETag);
@@ -371,7 +447,9 @@ Microsoft.Azure.Devices.Client.TransportType.Mqtt);
             Debug.WriteLine("");
 
         }
+
         #endregion
+
         #region sheduledtask
         private async void cmd11ScheduledUpdate_Click(object sender, RoutedEventArgs e)
         {
